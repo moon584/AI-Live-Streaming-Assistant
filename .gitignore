@@ -1,0 +1,58 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+#SSH 密钥
+.ssh
+
+# 虚拟环境
+.venv/
+venv/
+ENV/
+.env
+
+# 日志文件
+logs/
+*.log
+
+# 数据库
+*.db
+*.sqlite3
+
+# 备份文件
+*_backup.py
+*_old.py
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 操作系统
+.DS_Store
+Thumbs.db
+
+# 测试文件
+test_*.py
+*_test.py
+
+# 敏感文件
+api_key_secure.txt
+
+# Python 包打包产物
+dist/
+build/
+*.egg-info/
+
+# 测试/工具缓存与覆盖率
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+coverage/
+.coverage

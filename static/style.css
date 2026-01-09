@@ -1,0 +1,449 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+    overflow: hidden; /* 页面不滚动，内部区域滚动 */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    height: calc(100vh - 40px); /* 填满视口高度（扣除body padding） */
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.header h1 {
+    font-size: 2.0em;
+    margin-bottom: 6px;
+}
+
+.header p {
+    opacity: 0.9;
+    font-size: 1.0em;
+}
+
+.header-actions .btn {
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.35);
+}
+.header-actions .btn:hover {
+    background: rgba(255,255,255,0.3);
+}
+
+.main-content {
+    display: flex;
+    flex: 1 1 auto;
+    min-height: 0; /* 允许子元素按flex收缩 */
+    overflow: hidden; /* 内部分区自己滚动 */
+}
+
+.config-panel {
+    /* 可动画的侧边栏宽度 */
+    flex: 0 0 380px;
+    width: 380px;
+    min-width: 0;
+    background: #f8f9fa;
+    padding: 25px;
+    border-right: 1px solid #e9ecef;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* 由内部区域滚动 */
+    transition: flex-basis .28s ease, width .28s ease, padding .28s ease, border-color .28s ease, opacity .2s ease;
+}
+
+/* 折叠侧边栏（商品面板）时，隐藏左侧并让右侧占满 */
+.container.sidebar-collapsed .config-panel {
+    flex-basis: 0px;
+    width: 0px;
+    padding-left: 0;
+    padding-right: 0;
+    border-right-color: transparent;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.chat-panel {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    min-width: 0; /* 防止溢出导致布局抖动 */
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+.input-group input:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.product-list {
+    margin-top: 20px;
+    flex: 1 1 auto;         /* 占据左侧面板剩余空间 */
+    min-height: 0;          /* 允许内部产生滚动 */
+    overflow-y: auto;       /* 商品区域滚动 */
+    padding-right: 8px;     /* 预留滚动条空间避免遮挡 */
+}
+
+.product-item {
+    margin-bottom: 15px;
+    padding: 15px;
+    background: white;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+}
+
+.product-basic-info {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.product-index {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #667eea;
+    color: #fff;
+    font-weight: 700;
+    font-size: 13px;
+}
+
+.product-type {
+    padding: 10px;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    font-size: 14px;
+    background: white;
+    min-width: 120px;
+}
+
+.product-attributes {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 10px;
+    border-left: 4px solid #667eea;
+}
+
+.attribute-group {
+    margin-bottom: 15px;
+}
+
+.attribute-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #555;
+    font-size: 14px;
+}
+
+.attribute-input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+/* 针对尺寸字段（data-key="size"）的单独样式，让长×宽×高输入更紧凑 */
+.attribute-input[data-key="size"] {
+    width: 100%px; 
+    padding: 6px 8px;
+    font-size: 13px;
+}
+
+.attribute-select {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    background: white;
+}
+
+.attribute-textarea {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    resize: vertical;
+    min-height: 60px;
+    font-family: inherit;
+}
+
+.product-item input {
+    flex: 1;
+    padding: 10px;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+}
+
+.price-input {
+    width: 120px;
+}
+
+.btn {
+    padding: 12px 25px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s;
+    font-weight: 600;
+}
+
+.btn:hover {
+    background: #5a6fd8;
+    transform: translateY(-2px);
+}
+
+.btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.btn-add {
+    background: #1dd1a1;
+    padding: 8px 15px;
+    font-size: 14px;
+}
+
+.btn-add:hover {
+    background: #10ac84;
+}
+
+.btn-remove {
+    background: #ff9ff3;
+    padding: 8px 15px;
+    font-size: 14px;
+}
+
+.btn-remove:hover {
+    background: #f368e0;
+}
+
+.btn-secondary {
+    background: #48dbfb;
+    padding: 8px 15px;
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+.btn-secondary:hover {
+    background: #0abde3;
+}
+
+/* 浮动侧边栏切换按钮（仅在折叠时显示） */
+.sidebar-fab {
+    position: fixed;
+    left: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    border: none;
+    background: #667eea;
+    color: #fff;
+    font-size: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    cursor: pointer;
+    z-index: 1000;
+    transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+}
+.sidebar-fab:hover {
+    background: #5a6fd8;
+    transform: translateY(-50%) scale(1.05);
+    box-shadow: 0 10px 22px rgba(0,0,0,0.24);
+}
+
+.chat-container {
+    flex: 1 1 auto;
+    padding: 20px;
+    overflow-y: auto;
+    background: #fafafa;
+}
+
+.message {
+    margin: 15px 0;
+    padding: 15px;
+    border-radius: 12px;
+    line-height: 1.5;
+    max-width: 80%;
+}
+
+.user-message {
+    background: #667eea;
+    color: white;
+    margin-left: auto;
+    border-bottom-right-radius: 4px;
+}
+
+.assistant-message {
+    background: white;
+    color: #333;
+    margin-right: auto;
+    border: 2px solid #667eea;
+    border-bottom-left-radius: 4px;
+}
+
+.input-area {
+    padding: 20px;
+    display: flex;
+    gap: 10px;
+    border-top: 1px solid #e9ecef;
+}
+
+.input-area input {
+    flex: 1;
+    padding: 15px;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.input-area input:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.status {
+    text-align: center;
+    padding: 10px;
+    color: #666;
+    font-size: 14px;
+    background: #fff9e6;
+    flex: 0 0 auto; /* 底部固定高度，不随内容滚动 */
+}
+
+.error {
+    color: #e74c3c;
+    background: #ffeaea;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 0;
+    display: none;
+}
+
+.suggestion-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 15px;
+    border-top: 1px solid #e9ecef;
+    align-items: center;
+}
+
+.suggestion-btn {
+    padding: 8px 15px;
+    background: #e9ecef;
+    border: 1px solid #ced4da;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: all 0.2s;
+}
+
+.suggestion-btn:hover {
+    background: #667eea;
+    color: white;
+    border-color: #667eea;
+}
+
+.suggestion-product-select {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+.suggestion-product-select label {
+    font-size: 12px;
+    color: #555;
+}
+.suggestion-product-select select {
+    padding: 6px 10px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    font-size: 13px;
+    background: #fff;
+}
+
+.session-info {
+    background: #d4edda;
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.price-unit-group {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.unit-select {
+    padding: 10px;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    font-size: 14px;
+    background: white;
+    min-width: 80px;
+}
+
+.unit-select:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.price-input {
+    width: 100px;
+}

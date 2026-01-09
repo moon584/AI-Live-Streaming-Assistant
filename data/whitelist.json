@@ -1,0 +1,102 @@
+{
+  "_comment": "FAQ白名单：关键词匹配后直接返回答案，不调用AI模型",
+  "_format": "{ session_id: [ {pattern, answer, priority, product_types} ] }",
+  "_priority_rule": "数值越大优先级越高。推荐：价格(100) > 怎么买(80) > 一般问题(50)",
+  "_product_types": "fruit(水果), vegetable(蔬菜), meat(禽蛋肉类), grain(五谷杂粮), handicraft(手工艺品), processed(加工食品)",
+  "_global": "通用FAQ，适用于所有商品类型",
+  
+  "_global_faqs": [
+    {"pattern": "怎么买", "answer": "点击直播间下方的商品链接即可下单购买！", "priority": 90, "product_types": ""},
+    {"pattern": "链接", "answer": "商品链接就在直播间下方，点击即可购买~", "priority": 90, "product_types": ""},
+    {"pattern": "怎么下单", "answer": "点击商品链接，选择规格和数量，提交订单就可以了~", "priority": 90, "product_types": ""},
+    {"pattern": "包邮", "answer": "满100元包邮，未满按实际运费计算哦~", "priority": 80, "product_types": ""},
+    {"pattern": "运费", "answer": "满100元包邮，未满按地区收取运费，一般5-15元~", "priority": 80, "product_types": ""},
+    {"pattern": "优惠", "answer": "现在下单就是最大优惠！限时特价中，错过就没有啦~", "priority": 75, "product_types": ""},
+    {"pattern": "发货", "answer": "当天下单，次日发货，顺丰/邮政快递~", "priority": 70, "product_types": ""},
+    {"pattern": "快递", "answer": "我们用顺丰和邮政快递，一般3-5天送达~", "priority": 70, "product_types": ""},
+    {"pattern": "退货", "answer": "7天无理由退货，商品有问题随时联系客服~", "priority": 65, "product_types": ""},
+    {"pattern": "售后", "answer": "我们有专业客服团队，任何问题都可以联系售后哦~", "priority": 65, "product_types": ""}
+  ],
+  
+  "_fruit_faqs": [
+    {"pattern": "甜不甜", "answer": "我们的水果都是精选高甜度的，保证甜！不甜包退~", "priority": 95, "product_types": "fruit"},
+    {"pattern": "甜吗", "answer": "甜度保证！每一颗都是精心挑选的，口感特别好~", "priority": 95, "product_types": "fruit"},
+    {"pattern": "新鲜", "answer": "绝对新鲜！现摘现发，当天采摘当天发货~", "priority": 90, "product_types": "fruit"},
+    {"pattern": "新鲜吗", "answer": "新鲜度保证！树上熟的，采摘后立即发货~", "priority": 90, "product_types": "fruit"},
+    {"pattern": "口感", "answer": "口感特别好！多汁香甜，咬一口满嘴都是果香~", "priority": 85, "product_types": "fruit"},
+    {"pattern": "怎么挑", "answer": "我们已经帮您精选好了，每一个都是优质果~", "priority": 80, "product_types": "fruit"},
+    {"pattern": "坏果", "answer": "坏果包赔！收到有问题的果子立即联系客服~", "priority": 80, "product_types": "fruit"},
+    {"pattern": "产地", "answer": "我们的水果来自原产地直供，品质有保障~", "priority": 75, "product_types": "fruit"},
+    {"pattern": "哪里的", "answer": "原产地直供，保证正宗的地道风味~", "priority": 75, "product_types": "fruit"},
+    {"pattern": "保存", "answer": "收到后放冰箱冷藏，3-7天内吃完最佳~", "priority": 70, "product_types": "fruit"},
+    {"pattern": "怎么存", "answer": "建议冷藏保存，尽快食用口感更好~", "priority": 70, "product_types": "fruit"},
+    {"pattern": "催熟", "answer": "可以和苹果、香蕉放一起，2-3天就能催熟~", "priority": 65, "product_types": "fruit"},
+    {"pattern": "大小", "answer": "我们按规格分级，每个都是标准大小，放心拍~", "priority": 65, "product_types": "fruit"},
+    {"pattern": "重量", "answer": "净重足称，绝不短斤少两！", "priority": 65, "product_types": "fruit"}
+  ],
+  
+  "_vegetable_faqs": [
+    {"pattern": "新鲜", "answer": "绝对新鲜！当天采摘当天发货，保证水灵灵的~", "priority": 95, "product_types": "vegetable"},
+    {"pattern": "新鲜吗", "answer": "新鲜度100%！现摘现发，比菜市场还新鲜~", "priority": 95, "product_types": "vegetable"},
+    {"pattern": "怎么做", "answer": "清炒、炖煮、凉拌都可以，怎么做都好吃~", "priority": 85, "product_types": "vegetable"},
+    {"pattern": "怎么吃", "answer": "做法很多！可以清炒、煲汤，营养又美味~", "priority": 85, "product_types": "vegetable"},
+    {"pattern": "有机", "answer": "生态种植，少农药，吃起来更放心~", "priority": 80, "product_types": "vegetable"},
+    {"pattern": "农药", "answer": "我们采用生态种植，农药残留检测合格~", "priority": 80, "product_types": "vegetable"},
+    {"pattern": "嫩不嫩", "answer": "都是嫩的！精选最佳采摘期，口感特别好~", "priority": 80, "product_types": "vegetable"},
+    {"pattern": "老不老", "answer": "保证嫩！不会有老的，口感很好~", "priority": 80, "product_types": "vegetable"},
+    {"pattern": "保存", "answer": "放冰箱冷藏，3-5天内吃完最好~", "priority": 70, "product_types": "vegetable"},
+    {"pattern": "产地", "answer": "本地生态农场直供，品质有保障~", "priority": 75, "product_types": "vegetable"}
+  ],
+  
+  "_meat_faqs": [
+    {"pattern": "新鲜", "answer": "当天宰杀，冷链配送，保证新鲜~", "priority": 95, "product_types": "meat"},
+    {"pattern": "新鲜吗", "answer": "绝对新鲜！冷链运输，全程冷冻保鲜~", "priority": 95, "product_types": "meat"},
+    {"pattern": "怎么养的", "answer": "散养/生态养殖，肉质紧实，口感一流~", "priority": 90, "product_types": "meat"},
+    {"pattern": "养殖", "answer": "生态养殖，不打激素，健康放心~", "priority": 90, "product_types": "meat"},
+    {"pattern": "肉质", "answer": "肉质鲜美紧实，炖煮煎炒都好吃~", "priority": 85, "product_types": "meat"},
+    {"pattern": "口感", "answer": "口感特别好！肉质细嫩，没有腥味~", "priority": 85, "product_types": "meat"},
+    {"pattern": "怎么做", "answer": "红烧、清蒸、炖汤都可以，怎么做都美味~", "priority": 80, "product_types": "meat"},
+    {"pattern": "保存", "answer": "冷冻保存，15天内食用完最佳~", "priority": 75, "product_types": "meat"},
+    {"pattern": "检疫", "answer": "都有检疫证明，安全放心！", "priority": 80, "product_types": "meat"},
+    {"pattern": "冷冻", "answer": "我们用冷链配送，全程保持冷冻状态~", "priority": 75, "product_types": "meat"}
+  ],
+  
+  "_grain_faqs": [
+    {"pattern": "产地", "answer": "原产地直供，保证正宗品质~", "priority": 85, "product_types": "grain"},
+    {"pattern": "哪里的", "answer": "来自优质产区，品质有保障~", "priority": 85, "product_types": "grain"},
+    {"pattern": "新米", "answer": "今年新米，颗粒饱满，香味浓郁~", "priority": 90, "product_types": "grain"},
+    {"pattern": "陈米", "answer": "绝对不是陈米！都是今年新收的~", "priority": 90, "product_types": "grain"},
+    {"pattern": "怎么煮", "answer": "淘洗干净后，加水煮饭或煮粥都可以~", "priority": 80, "product_types": "grain"},
+    {"pattern": "怎么吃", "answer": "可以煮饭、煮粥、打豆浆，营养丰富~", "priority": 80, "product_types": "grain"},
+    {"pattern": "保质期", "answer": "密封保存6-12个月，开封后尽快吃完~", "priority": 75, "product_types": "grain"},
+    {"pattern": "保存", "answer": "放在阴凉干燥处，密封保存~", "priority": 75, "product_types": "grain"},
+    {"pattern": "营养", "answer": "营养丰富！富含蛋白质、纤维素等多种营养~", "priority": 70, "product_types": "grain"}
+  ],
+  
+  "_handicraft_faqs": [
+    {"pattern": "手工", "answer": "纯手工制作，每一件都是匠心之作~", "priority": 90, "product_types": "handicraft"},
+    {"pattern": "材质", "answer": "采用天然材料，环保健康~", "priority": 85, "product_types": "handicraft"},
+    {"pattern": "材料", "answer": "天然材质，无添加，使用安全~", "priority": 85, "product_types": "handicraft"},
+    {"pattern": "工艺", "answer": "传统工艺制作，传承文化之美~", "priority": 80, "product_types": "handicraft"},
+    {"pattern": "耐用", "answer": "质量很好，正常使用可以用很久~", "priority": 80, "product_types": "handicraft"},
+    {"pattern": "独特", "answer": "每一件都是独一无二的，手工制作不会完全相同~", "priority": 75, "product_types": "handicraft"},
+    {"pattern": "送人", "answer": "非常适合送礼！有文化底蕴，很有面子~", "priority": 75, "product_types": "handicraft"},
+    {"pattern": "保养", "answer": "日常注意防潮防晒，就可以保存很久~", "priority": 70, "product_types": "handicraft"}
+  ],
+  
+  "_processed_faqs": [
+    {"pattern": "保质期", "answer": "保质期6-12个月，生产日期都是最近的~", "priority": 90, "product_types": "processed"},
+    {"pattern": "配料", "answer": "配料表都在包装上，天然健康无添加~", "priority": 85, "product_types": "processed"},
+    {"pattern": "添加剂", "answer": "零添加！都是天然食材制作~", "priority": 85, "product_types": "processed"},
+    {"pattern": "好吃吗", "answer": "味道特别好！很多回头客都在回购~", "priority": 80, "product_types": "processed"},
+    {"pattern": "怎么吃", "answer": "开袋即食，也可以加热后食用更香~", "priority": 80, "product_types": "processed"},
+    {"pattern": "辣不辣", "answer": "有不同口味可选，辣度标注在包装上~", "priority": 75, "product_types": "processed"},
+    {"pattern": "保存", "answer": "阴凉干燥处保存，开封后尽快吃完~", "priority": 75, "product_types": "processed"},
+    {"pattern": "卫生", "answer": "正规厂家生产，有食品安全认证~", "priority": 80, "product_types": "processed"}
+  ],
+  
+  "_example_session": [
+    {"pattern": "价格", "answer": "具体价格请看直播间商品列表，主播会实时更新哦~", "priority": 100, "product_types": ""},
+    {"pattern": "多少钱", "answer": "具体价格请看直播间商品列表，主播会实时更新哦~", "priority": 100, "product_types": ""}
+  ]
+}

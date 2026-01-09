@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>直播销售助手</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-title">
+                <h1>🌾 乡聚助农 - 小聚AI助手</h1>
+                <p>连接城乡，让优质农产品走进千家万户</p>
+            </div>
+            <div class="header-actions">
+                <button id="sidebarToggle" class="btn btn-secondary" type="button" title="隐藏/展开商品面板 (Alt+L)">⮞ 隐藏商品面板</button>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="config-panel">
+                <h3>📝 直播信息配置</h3>
+
+                <div class="input-group">
+                    <label for="userName">主播名称</label>
+                    <input type="text" id="userName" placeholder="请输入你的主播名" />
+                </div>
+
+                <div class="input-group">
+                    <label for="liveTheme">直播主题</label>
+                    <input type="text" id="liveTheme" placeholder="例如：美妆专场、食品促销" />
+                </div>
+
+                <div class="product-list">
+                    <label>售卖商品列表</label>
+                    <div id="productsContainer">
+                        <div class="product-item">
+                            <!-- 基础信息 -->
+                            <div class="product-basic-info">
+                                <span class="product-index">1</span>
+                                <input type="text" class="product-name" placeholder="商品名称" />
+                                <select class="product-type" onchange="updateProductAttributes(this)">
+                                    <option value="">选择商品类型</option>
+                                    <option value="fruit">水果</option>
+                                    <option value="vegetable">蔬菜</option>
+                                    <option value="meat">禽蛋肉类</option>
+                                    <option value="grain">五谷杂粮</option>
+                                    <option value="handicraft">手工艺品</option>
+                                    <option value="processed">加工食品</option>
+                                </select>
+                                <div class="price-unit-group">
+                                    <input type="number" class="product-price price-input" placeholder="价格" step="0.01" min="0" />
+                                    <select class="unit-select">
+                                        <option value="元/斤">元/斤</option>
+                                        <option value="元/个">元/个</option>
+                                        <option value="元/箱">元/箱</option>
+                                        <option value="元/盒">元/盒</option>
+                                        <option value="元/袋">元/袋</option>
+                                        <option value="元/公斤">元/公斤</option>
+                                        <option value="元/份">元/份</option>
+                                        <option value="元">元</option>
+                                    </select>
+                                </div>
+                                <button class="btn btn-remove" onclick="removeProduct(this)">删除</button>
+                            </div>
+                            
+                            <!-- 动态属性区域 -->
+                            <div class="product-attributes" style="display: none;">
+                                <!-- 这里会根据商品类型动态生成不同的属性输入框 -->
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-add" onclick="addProduct()">+ 添加商品</button>
+                </div>
+
+                <button class="btn" onclick="createSession()" style="margin-top: 20px; width: 100%;">创建直播会话</button>
+
+                <div class="error" id="errorMessage"></div>
+
+                <div class="session-info" id="sessionInfo" style="display: none;">
+                    <strong>当前会话：</strong>
+                    <span id="sessionDetails"></span>
+                    <button class="btn btn-secondary" onclick="startNewConversation()" style="margin-left: 10px;">🔄 开启新对话</button>
+                </div>
+            </div>
+
+            <div class="chat-panel">
+                <div class="chat-container" id="chatContainer">
+                    <div class="message assistant-message">
+                        👋 欢迎使用专业版直播销售助手！请先在左侧配置直播信息，创建会话后即可开始生成专业的直播话术。
+                    </div>
+                </div>
+
+                <div class="suggestion-buttons" id="suggestionButtons" style="display: none;">
+                    <div class="suggestion-btn" title="Alt+1" onclick="askSuggestion('产品介绍')">📦 产品介绍</div>
+                    <div class="suggestion-btn" title="Alt+2" onclick="askSuggestion('食用方法')">🍳 食用方法</div>
+                    <div class="suggestion-btn" title="Alt+3" onclick="askSuggestion('APP功能')">📱 APP功能</div>
+                    <div class="suggestion-btn" title="Alt+4" onclick="askSuggestion('乡村文化')">🏡 乡村文化</div>
+                    <div class="suggestion-btn" title="Alt+5" onclick="askSuggestion('促销引导')">💬 促销引导</div>
+                    <div class="suggestion-product-select" id="suggestionProductBox" style="display:none;">
+                        <label for="suggestionProductSelect">商品</label>
+                        <select id="suggestionProductSelect"></select>
+                    </div>
+                </div>
+
+                <div class="input-area">
+                    <input type="text" id="messageInput" placeholder="输入你的需求或问题..." disabled />
+                    <button class="btn" id="sendButton" onclick="sendMessage()" disabled>发送</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 智能控制面板（已移除） -->
+
+        <div class="status" id="status">
+            请先配置直播信息并创建会话
+        </div>
+    </div>
+
+    <!-- 浮动快捷按钮（侧边栏折叠时显示） -->
+    <button id="sidebarFab" class="sidebar-fab" title="展开商品面板 (Alt+L)" style="display:none;">⮜</button>
+
+    <!-- Need-info Modal: 当后端要求补充商品信息时弹出 -->
+    <div id="needInfoModal" class="modal" style="display:none;">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <h3 id="needInfoTitle">补充信息</h3>
+            <p id="needInfoPrompt">请提供信息</p>
+            <div id="needInfoProductRow" style="margin:8px 0;">
+                <label for="needInfoProductSelect">商品：</label>
+                <select id="needInfoProductSelect"></select>
+            </div>
+            <div id="needInfoProductTextRow" style="margin:8px 0; display:none;">
+                <label for="needInfoProductName">商品名：</label>
+                <input id="needInfoProductName" type="text" placeholder="请输入商品名或序号=值的左侧" />
+            </div>
+            <div style="margin:8px 0;">
+                <label id="needInfoValueLabel" for="needInfoValue">值：</label>
+                <input id="needInfoValue" type="text" style="width:100%" />
+            </div>
+            <div style="text-align:right; margin-top:12px;">
+                <button id="needInfoCancel" class="btn btn-secondary">取消</button>
+                <button id="needInfoSave" class="btn">保存并继续</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
